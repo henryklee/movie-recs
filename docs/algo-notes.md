@@ -1,0 +1,1 @@
+# Explanations for various decisions on algorithm construction, weights, etc. 
