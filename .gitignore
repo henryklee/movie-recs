@@ -1,1 +1,8 @@
-my-data/*.CSV
+
+
+__pycache__/
+*.pyc
+
+my-data/raw/*.csv
+my-data/processed/*.csv
+
