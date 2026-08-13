@@ -6,3 +6,4 @@ __pycache__/
 my-data/raw/*.csv
 my-data/processed/*.csv
 
+.env
