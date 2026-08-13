@@ -49,17 +49,18 @@ def fetch_all(films_df: pd.DataFrame, apikey:str, title_col = "Name", year_col =
     for _, row in films_df.iterrows():
         key = _cache_key(row[title_col], row[year_col])
         if key in cache: 
-            cache[key] = fetch_one(row[title_col], row[year_col], apikey)
-            new_calls += 1
-            time.sleep(request_delay)
+            continue
+        cache[key] = fetch_one(row[title_col], row[year_col], apikey)
+        new_calls += 1
+        time.sleep(request_delay)
 
-    if new_calls % 50 == 0:
-        _save_cache(cache)
-        print(f"... {new_calls} new lookups so far")
+        if new_calls % 50 == 0:
+            _save_cache(cache)
+            print(f"... {new_calls} new lookups so far")
 
-        _save_cache(cache)
-        print(f"Done! {new_calls} new API calls, {len(cache)} total entries in cache.")
-        return cache
+    _save_cache(cache)
+    print(f"Done! {new_calls} new API calls, {len(cache)} total entries in cache.")
+    return cache
 
 def cache_to_dataframe(cache:dict) -> pd.DataFrame:
     records = []
